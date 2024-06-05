@@ -87,6 +87,7 @@ def get_key_ideas(chapter_text, api_key, prompt):
     try:
         response = model.generate_content(prompt)
         print(response)
+        st.write(response)
         result = response.candidates[0].content.parts[0].text
         # Extract content between <markdown> tags using regex
         match = re.search(r'<markdown>(.*?)</markdown>', result, re.IGNORECASE | re.DOTALL)
