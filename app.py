@@ -5,53 +5,69 @@ import google.generativeai as genai
 
 # Default prompt
 default_prompt = """
-Here is the raw text from a book:
+# Mission
+
+You are an expert teacher extracting key concepts/lessons and actionable frameworks/methodologies from educational video transcripts or book chapters. Your job is to provide a comprehensive, accurate and detailed summary of the content with a focus on practical application. This should replace needing to read the original content. 
+
+# Rules
+
+Please read through the text carefully. Your task is to extract a comprehensive, accurate and detailed summary of the content and to present them in a well-organized markdown format.
+
+Look specifically for:
+•⁠  ⁠Practical concepts and lessons 
+•⁠  ⁠Specific anecdotes or stories that help explain a concept or lesson
+•⁠  ⁠Specific actionable steps, how-tos or frameworks/methodologies
+
+# Expected Input
+
+You will receive the full text from the file.
 
 <book_text>
 {book_text}
 </book_text>
 
-Please read through the text carefully. Your task is to extract the key lessons, important details, and relevant specifics, and present them in a well-organized markdown format.
 
-Specifically, look for:
-- Key concepts, theories, mental models, frameworks, methods and ideas
-- Illuminating anecdotes, examples or stories that illustrate the main points
-- Specific action items, exercises, or how-to steps the reader can take
-- Relevant details that add depth and context to the key lessons
-- **Direct quotes from the book that powerfully capture key points**
+# Output Format (in markdown)
 
-Organize the information you extract into sections with clear headings. 
-Begin each key concept section with an introductory paragraph that provides an overview, context, and significance of the concept being discussed. This introductory paragraph is crucial and should always be included. Then, thoroughly present the relevant lessons and details - liberal use of bulletpoints and sub-bullets is encouraged to structure the information and capture all important specifics.
-Include both the high-level takeaways as well as noteworthy details and examples. Err on the side of over-including relevant details and examples rather than excluding them. Minor points can be included if they help illustrate or support major lessons.
-The goal is to create a comprehensive resource that captures not only the essential knowledge from the book, but also the key supporting information, details, examples and quotes. The final deliverable should be organized in an easy to reference format with a hierarchy of information. 
-Write your markdown-formatted response extracting and presenting the book's key lessons, concepts, examples, action items, relevant details, and powerful quotes inside <markdown> tags. Utilize tables where appropriate to enhance clarity and readability.
+1.⁠ ⁠Summary:
+   - Provide a high-level executive summary of the content including the overall topics, purpose and outcomes expected
 
-Here is an example of the desired format for your response:
+2.⁠ ⁠Topics:
+   - List the key topics, concepts and/or lessons in concise bullet points including specific outcomes for the learner
+
+3.⁠ ⁠Content
+•⁠  ⁠provide a comprehensive, accurate and detailed summary of ALL content with a focus on practical application for the learner
+•⁠  ⁠include all relevant detail from the content 
+ - Outline specific anecdotes or stories that support key concepts or lessons
+
+4.⁠ ⁠Action Items
+ - Provide a comprehensive list of specific action items, how-to steps or frameworks for applying the knowledge within the content
+
+Go over your output and ensure accuracy and perfection, it is very important that this is an A grade output suitable for educated individuals with limited time but need for detail/accuracy.
+
+IMPORTANT!!! Output your response within <markdown></markdown> tags.
+
+Example Format:
 
 <markdown>
 
-## Introduction
-[Overview of the main themes, ideas, or concepts]
+*Summary:*
+Provide a high-level executive summary.
 
-## Key Concept 1
-[This introduction paragraph providing an overview, context, and significance of Key Concept 1 should always be included]
-- Detail 1a
-- Detail 1b
-  - Sub-detail 1b1
-  - Sub-detail 1b2
-- Detail 1c 
-> "Relevant quote 1" - Author
+*Topics:*
+•⁠  ⁠Topic/lesson 1
+•⁠  ⁠Topic/lesson 2
+•⁠  ⁠...
 
-## Key Concept 2
-[This introduction paragraph providing an overview, context, and significance of Key Concept 2 should always be included]
-- Detail 2a
-- Detail 2b
-  - Sub-detail 2b1
-    - Sub-sub-detail 2b1a
-  - Sub-detail 2b2
-> "Relevant quote 2" - Author
+*Content:*
+  - Concept, lesson, insight or topic in comprehensive detail including any related anecdotes/stories
+  - ...
 
-Etc.
+*Action items:*
+
+  - Action Item 1: Step-by-step instructions
+  - Action Item 2: Step-by-step instructions
+  - …
 
 </markdown>
 """
